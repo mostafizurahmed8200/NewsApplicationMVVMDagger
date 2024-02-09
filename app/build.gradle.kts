@@ -1,6 +1,10 @@
+@file:Suppress("DEPRECATION")
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 
 }
 
@@ -16,7 +20,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,5 +68,38 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+
+
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+// Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+// OkHttp
+    implementation(libs.okhttp)
+
+// Glide
+    implementation(libs.glide)
+//noinspection KaptUsageInsteadOfKsp
+    kapt(libs.glide.compiler)
+
+// ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+// Coroutine
+    implementation(libs.kotlinx.coroutines.android)
+
+// Lifecycle
+    implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+//Room DB
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime) // Use the correct version
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.androidx.room.compiler)
 }
- 
+kapt { correctErrorTypes = true }
